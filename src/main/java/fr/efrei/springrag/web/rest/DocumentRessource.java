@@ -1,6 +1,6 @@
 package fr.efrei.springrag.web.rest;
 
-import fr.efrei.springrag.DocumentService;
+import fr.efrei.springrag.service.DocumentService;
 import fr.efrei.springrag.domain.Document;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class DocumentRessource {
@@ -35,27 +36,22 @@ public class DocumentRessource {
                 .body(result);
     }
 
-//    @GetMapping("/documents")
-//    public ResponseEntity<Document> findDocumentById(Long id) throws URISyntaxException {
-//        Document result = documentService.findDocumentById(id);
-//        return ResponseEntity
-//                .ok()
-//                .body(result);
-//    }
+    @GetMapping("/documents/{id}")
+    public ResponseEntity<Document> findDocumentById(Long id) throws URISyntaxException {
+        Optional<Document> result = documentService.findDocumentById(id);
+        return ResponseEntity.of(result);
+    }
 
-//    @GetMapping("/documents")
-//    public ResponseEntity<> deleteDocument(Long id) throws URISyntaxException {
-//        documentService.deleteDocument(id);
-//        return ResponseEntity.ok();
-//    }
+    @DeleteMapping("/documents/delete/{id}")
+    public void deleteDocument(Long id) throws URISyntaxException {
+        documentService.deleteDocument(id);
+    }
 
-//    @PostMapping("/documents")
-//    public ResponseEntity<Document> addDocument(RequestBody Document){
-//        return "Hello";
-//    }
-//
-//    @PostMapping
-//    public ResponseEntity<Document> getDocument(@PathVariable(value = "value", response = false)) final String{
-//        return "Hello";
-//    }
+    @PostMapping("/documents/chat2/{user}")
+    public String chat2(@RequestBody String query) throws InterruptedException {
+        String result = documentService.chat(query);
+
+        return result;
+    }
+
 }
