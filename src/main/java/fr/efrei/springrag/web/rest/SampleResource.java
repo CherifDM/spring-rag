@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SampleResource {
 
-    @GetMapping("/sample/{value}")
+    @GetMapping("/samples/{value}")
     public String hello(@PathVariable(value = "value", required = false) final String value){
         return "Hello " + value + "!";
     }
